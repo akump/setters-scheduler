@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Setters Scheduler",
+  "version": "1.0.0",
+  "description": "Parse a volleyball/league schedule PDF open in your browser tab and add your team's games to Google Calendar.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsWMnbpEemX0JzXlvlpPEKmL9phEU6BcPKYKfrvaC/flW9A9cvfzKK2dSzK5CpeOZOPfHoW3O44hGWfoiei9Tx749+qBivc0ag+YpEoXykOAA95qE43BfPPyBr/mv83ZlBjX8O4Mrbhp+Ey5c7pdvXhyrsAVe90ovf6e8ufF9sOQflmDDQlN0jcWaGGxviWlEQmS3nM7/zR/iolxh8suI6z6YKuOVmuu14am2YDvNuVWPnLiQoRpeMhZTnz1LSYaMAuW1o4gRk933VPOmv+ItqNwKqsij4L2cXYhNXjUvFKlTrh6oQB8uy31oNzMAShhb2UF53q1SzjushRqgWYZa0wIDAQAB",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "identity",
+    "storage"
+  ]
+}

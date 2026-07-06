@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 640px;
+        height: 400px;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #1b1d24 0%, #24273a 100%);
+        display: flex;
+        align-items: center;
+        padding: 0 36px;
+        gap: 32px;
+      }
+
+      .brand {
+        flex: 0 0 260px;
+        color: #f2f2f5;
+      }
+      .brand-header {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 12px;
+      }
+      .brand-header img {
+        width: 32px;
+        height: 32px;
+        flex: none;
+      }
+      .brand-header h1 {
+        font-size: 19px;
+        margin: 0;
+        letter-spacing: -0.2px;
+        white-space: nowrap;
+      }
+      .tagline {
+        font-size: 15px;
+        line-height: 1.4;
+        color: #d3d5df;
+        margin: 0 0 14px;
+        max-width: 300px;
+      }
+      .features {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .features li {
+        font-size: 12.5px;
+        color: #b8bac4;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .features li::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #6ea8fe;
+        flex: none;
+      }
+
+      .mock {
+        flex: 0 0 276px;
+        background: #1e1e22;
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        border: 1px solid #313138;
+      }
+      .mock-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #f5f5f7;
+        margin-bottom: 10px;
+      }
+      .mock-row-fields {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .mock-row-fields > div {
+        flex: 1;
+        min-width: 0;
+      }
+      .mock-field {
+        font-size: 11px;
+        font-weight: 600;
+        color: #cfcfd4;
+        margin-bottom: 4px;
+      }
+      .mock-select {
+        background: #2a2a2f;
+        color: #e8e8ea;
+        border: 1px solid #3d3d44;
+        border-radius: 4px;
+        padding: 5px 8px;
+        font-size: 11.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mock-list {
+        border: 1px solid #35353c;
+        border-radius: 6px;
+        background: #232328;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      .mock-row {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        padding: 7px 9px;
+        border-bottom: 1px solid #2f2f35;
+      }
+      .mock-row:last-child {
+        border-bottom: none;
+      }
+      .mock-check {
+        width: 13px;
+        height: 13px;
+        margin-top: 2px;
+        border-radius: 3px;
+        background: #6ea8fe;
+        flex: none;
+      }
+      .mock-main {
+        font-size: 12px;
+        font-weight: 600;
+        color: #f0f0f2;
+      }
+      .mock-sub {
+        font-size: 11px;
+        color: #9a9aa2;
+        margin-top: 1px;
+      }
+      .mock-btn {
+        background: #6ea8fe;
+        color: #12141a;
+        font-size: 12.5px;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">
+      <div class="brand-header">
+        <img src="../icons/icon128.png" alt="" />
+        <h1>Setters Scheduler</h1>
+      </div>
+      <p class="tagline">
+        Open your league schedule PDF, pick your team, and add every game
+        straight to Google Calendar.
+      </p>
+      <ul class="features">
+        <li>Reads the schedule PDF right from your browser tab</li>
+        <li>Finds your team and lists every matchup automatically</li>
+        <li>Choose which Google Calendar the games go on</li>
+        <li>Won't add the same game twice</li>
+      </ul>
+    </div>
+    <div class="mock">
+      <div class="mock-title">Setters Scheduler</div>
+      <div class="mock-row-fields">
+        <div>
+          <div class="mock-field">My team</div>
+          <div class="mock-select">Setters of Catan (Andrew Kump)</div>
+        </div>
+        <div>
+          <div class="mock-field">Add to calendar</div>
+          <div class="mock-select">Andrew Kump (primary)</div>
+        </div>
+      </div>
+      <div class="mock-list">
+        <div class="mock-row">
+          <div class="mock-check"></div>
+          <div>
+            <div class="mock-main">Week 1: vs Bad News Bears</div>
+            <div class="mock-sub">6/22/2026 · 10:00pm · Court 8</div>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-check"></div>
+          <div>
+            <div class="mock-main">Week 2: vs Hungover</div>
+            <div class="mock-sub">6/29/2026 · 8:10pm · Court 4</div>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-check"></div>
+          <div>
+            <div class="mock-main">Week 3: vs Team Name</div>
+            <div class="mock-sub">7/6/2026 · 8:10pm · Court 8</div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-btn">Add to Google Calendar</div>
+    </div>
+  </body>
+</html>
