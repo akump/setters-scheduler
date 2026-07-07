@@ -5,6 +5,8 @@
 A Chrome extension that reads a league schedule PDF open in your browser tab,
 finds your team, and adds its games to Google Calendar — with one click.
 
+[Privacy Policy](https://akump.github.io/setters-scheduler/privacy-policy.html)
+
 ## Features
 
 - Parses the schedule PDF directly from the browser tab (no upload, no
