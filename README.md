@@ -9,7 +9,12 @@ finds your team, and adds its games to Google Calendar — with one click.
 
 - Parses the schedule PDF directly from the browser tab (no upload, no
   external service)
-- Auto-detects the team roster and every "Week / Court / Time" matchup
+- Supports two schedule formats: weekly league schedules (roster +
+  "Week / Court / Time" grid) and single-night tournament brackets
+  (free-form matchup text, no roster) — auto-detected from the PDF
+- For tournament brackets: resolves "winner of" bracket slots against your
+  team's actual results, marking games that only happen if you win an
+  earlier round as tentative
 - Pick your team and which Google Calendar the games go on
 - Skips games already on the calendar (matches by exact event title on the
   same day), so re-running it doesn't create duplicates
@@ -66,8 +71,10 @@ one.
 
 - `popup.html` / `popup.js` / `popup.css` — the extension's UI
 - `parser.js` / `parser-core.js` — PDF text extraction (pdf.js) and the
-  roster/schedule parsing logic (the latter has no browser dependencies, so
-  it's unit-testable directly in Node)
+  roster/schedule parsing logic for the weekly league format (the latter
+  has no browser dependencies, so it's unit-testable directly in Node)
+- `parser-tourney.js` / `parser-tourney-core.js` — same split, for the
+  single-night tournament bracket format
 - `background.js` — OAuth (`chrome.identity.launchWebAuthFlow`) and Google
   Calendar API calls
 - `lib/` — bundled pdf.js runtime

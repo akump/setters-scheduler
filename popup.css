@@ -23,6 +23,10 @@ h1 {
   color: #ff6b6b;
 }
 
+.status a {
+  color: #6ea8fe;
+}
+
 .field {
   margin-bottom: 10px;
   display: flex;
@@ -88,6 +92,20 @@ select:focus {
   color: #9a9aa2;
 }
 
+#game-list .game-main[data-badge]::after {
+  content: attr(data-badge);
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #d8a34d;
+  border: 1px solid #6b5326;
+  background: #3a2f1a;
+  border-radius: 4px;
+  padding: 1px 5px;
+  vertical-align: middle;
+}
+
 button {
   width: 100%;
   padding: 8px;
@@ -108,4 +126,44 @@ button:disabled {
   background: #3d4552;
   color: #7a828e;
   cursor: not-allowed;
+}
+
+/* Styled to read as Google's own "Sign in with Google" affordance (G logo,
+   subtle elevation on hover) rather than the app's regular blue action
+   button, since this is a distinct kind of action. Uses Google's dark-theme
+   button colors (bordered dark surface, light text) to match this popup's
+   own dark background — the multi-color G logo stays the same either way. */
+button.google-signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #2a2a2f;
+  color: #e8e8ea;
+  border: 1px solid #5f6368;
+}
+
+button.google-signin::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4Ij4KPHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTQzLjYxMSwyMC4wODNINDJWMjBIMjR2OGgxMS4zMDNjLTEuNjQ5LDQuNjU3LTYuMDgsOC0xMS4zMDMsOGMtNi42MjcsMC0xMi01LjM3My0xMi0xMmMwLTYuNjI3LDUuMzczLTEyLDEyLTEyYzMuMDU5LDAsNS44NDIsMS4xNTQsNy45NjEsMy4wMzlsNS42NTctNS42NTdDMzQuMDQ2LDYuMDUzLDI5LjI2OCw0LDI0LDRDMTIuOTU1LDQsNCwxMi45NTUsNCwyNGMwLDExLjA0NSw4Ljk1NSwyMCwyMCwyMGMxMS4wNDUsMCwyMC04Ljk1NSwyMC0yMEM0NCwyMi42NTksNDMuODYyLDIxLjM1LDQzLjYxMSwyMC4wODN6Ii8+CjxwYXRoIGZpbGw9IiNGRjNEMDAiIGQ9Ik02LjMwNiwxNC42OTFsNi41NzEsNC44MTlDMTQuNjU1LDE1LjEwOCwxOC45NjEsMTIsMjQsMTJjMy4wNTksMCw1Ljg0MiwxLjE1NCw3Ljk2MSwzLjAzOWw1LjY1Ny01LjY1N0MzNC4wNDYsNi4wNTMsMjkuMjY4LDQsMjQsNEMxNi4zMTgsNCw5LjY1Niw4LjMzNyw2LjMwNiwxNC42OTF6Ii8+CjxwYXRoIGZpbGw9IiM0Q0FGNTAiIGQ9Ik0yNCw0NGM1LjE2NiwwLDkuODYtMS45NzcsMTMuNDA5LTUuMTkybC02LjE5LTUuMjM4QzI5LjIxMSwzNS4wOTEsMjYuNzE1LDM2LDI0LDM2Yy01LjIwMiwwLTkuNjE5LTMuMzE3LTExLjI4My03Ljk0NmwtNi41MjIsNS4wMjVDOS41MDUsMzkuNTU2LDE2LjIyNyw0NCwyNCw0NHoiLz4KPHBhdGggZmlsbD0iIzE5NzZEMiIgZD0iTTQzLjYxMSwyMC4wODNINDJWMjBIMjR2OGgxMS4zMDNjLTAuNzkyLDIuMjM3LTIuMjMxLDQuMTY2LTQuMDg3LDUuNTcxYzAuMDAxLTAuMDAxLDAuMDAyLTAuMDAxLDAuMDAzLTAuMDAybDYuMTksNS4yMzhDMzYuOTcxLDM5LjIwNSw0NCwzNCw0NCwyNEM0NCwyMi42NTksNDMuODYyLDIxLjM1LDQzLjYxMSwyMC4wODN6Ii8+Cjwvc3ZnPgo=");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+button.google-signin:hover:not(:disabled) {
+  background: #35353c;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+button.google-signin:disabled {
+  background: #232328;
+  color: #6b6f7a;
+  border-color: #3d3d44;
+}
+
+button.google-signin:disabled::before {
+  opacity: 0.5;
 }

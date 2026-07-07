@@ -10,7 +10,7 @@
       <h1>Setters Scheduler</h1>
     </header>
 
-    <div id="status" class="status">Checking the current tab…</div>
+    <div id="status" class="status" hidden></div>
 
     <div id="app" hidden>
       <div class="field">
@@ -21,12 +21,15 @@
       <div class="field">
         <label for="calendar-select">Add to calendar</label>
         <select id="calendar-select">
-          <option value="">Sign in to choose a calendar…</option>
+          <option value="primary"></option>
         </select>
       </div>
 
       <div class="field inline">
-        <label><input type="checkbox" id="select-all" checked /> Select all games</label>
+        <label
+          ><input type="checkbox" id="select-all" checked /> Select all
+          games</label
+        >
       </div>
 
       <ul id="game-list"></ul>

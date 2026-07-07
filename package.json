@@ -1,8 +1,8 @@
 {
   "name": "setters-scheduler",
   "private": true,
-  "version": "1.0.0",
-  "description": "Chrome extension that parses a league schedule PDF and adds your team's games to Google Calendar.",
+  "version": "1.1.0",
+  "description": "Chrome extension that parses a league or tournament schedule PDF and adds your team's games to Google Calendar.",
   "scripts": {
     "build": "node scripts/build.mjs"
   }

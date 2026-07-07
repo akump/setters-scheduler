@@ -24,7 +24,27 @@ function eventsUrlFor(calendarId) {
   )}/events`;
 }
 
+// In-memory cache, mirrored to chrome.storage.session so the token survives
+// the service worker being suspended (MV3 workers unload after ~30s idle,
+// which otherwise made auth appear to "reset" between popup opens).
 let cachedToken = null; // { token, expiresAt }
+
+async function loadCachedToken() {
+  if (cachedToken) return cachedToken;
+  const { authToken } = await chrome.storage.session.get("authToken");
+  if (authToken) cachedToken = authToken;
+  return cachedToken;
+}
+
+async function saveCachedToken(token) {
+  cachedToken = token;
+  await chrome.storage.session.set({ authToken: token });
+}
+
+async function clearCachedToken() {
+  cachedToken = null;
+  await chrome.storage.session.remove("authToken");
+}
 
 function buildAuthUrl(interactive) {
   const url = new URL("https://accounts.google.com/o/oauth2/v2/auth");
@@ -52,14 +72,15 @@ async function launchGoogleAuth(interactive) {
 }
 
 async function getAuthToken(interactive) {
-  if (cachedToken && cachedToken.expiresAt - 30_000 > Date.now()) {
-    return cachedToken.token;
+  const existing = await loadCachedToken();
+  if (existing && existing.expiresAt - 30_000 > Date.now()) {
+    return existing.token;
   }
   try {
-    cachedToken = await launchGoogleAuth(false); // try a silent refresh first
+    await saveCachedToken(await launchGoogleAuth(false)); // try a silent refresh first
   } catch {
     if (!interactive) throw new Error("Not signed in");
-    cachedToken = await launchGoogleAuth(true);
+    await saveCachedToken(await launchGoogleAuth(true));
   }
   return cachedToken.token;
 }
@@ -134,7 +155,7 @@ async function addEventsToCalendar(calendarId, events) {
       // interactive sign-in.
       if (String(e.message).includes("401")) {
         try {
-          cachedToken = null;
+          await clearCachedToken();
           token = await getAuthToken(true);
           results.push(await addOneEvent(token, calendarId, event));
           continue;
@@ -149,8 +170,8 @@ async function addEventsToCalendar(calendarId, events) {
   return { results };
 }
 
-async function listCalendars() {
-  const token = await getAuthToken(true);
+async function listCalendars(interactive) {
+  const token = await getAuthToken(interactive);
   const url = new URL(CALENDAR_LIST_URL);
   url.searchParams.set("minAccessRole", "writer");
   url.searchParams.set("fields", "items(id,summary,primary)");
@@ -175,7 +196,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true; // keep the message channel open for the async response
   }
   if (message?.type === "LIST_CALENDARS") {
-    listCalendars()
+    listCalendars(!!message.interactive)
       .then((calendars) => sendResponse({ ok: true, calendars }))
       .catch((e) => sendResponse({ ok: false, error: e.message }));
     return true;

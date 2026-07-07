@@ -19,6 +19,8 @@ const INCLUDE = [
   "background.js",
   "parser.js",
   "parser-core.js",
+  "parser-tourney.js",
+  "parser-tourney-core.js",
   "popup.html",
   "popup.css",
   "popup.js",

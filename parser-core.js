@@ -4,7 +4,11 @@
 // with plain arrays of { y, page, items: [{str, x, y, width}] } rows.
 
 const TIME_RE = /^(\d{1,2}):(\d{2})$/;
-const MATCHUP_RE = /^(\d{1,3})\s*v\.?\s*(\d{1,3})$/i;
+// A "*" adjacent to one of the two team numbers marks a double header for
+// that specific team only — an extra game that doesn't count toward
+// standings (see the "* double header..." footnote on the schedule). E.g.
+// "2 v 5 *" flags team 5, not team 2; "* 1 v 4" flags team 1, not team 4.
+const MATCHUP_RE = /^(\*)?\s*(\d{1,3})\s*v\.?\s*(\d{1,3})\s*(\*)?$/i;
 const WEEK_RE = /^Week\s*(\d+)/i;
 const DATE_RE = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/;
 const COURT_RE = /^Court\s*(\S+)$/i;
@@ -113,13 +117,16 @@ export function parseSchedule(rows, courts) {
     for (const item of items) {
       const mm = MATCHUP_RE.exec(item.str);
       if (!mm) continue;
+      const team1 = parseInt(mm[2], 10);
+      const team2 = parseInt(mm[3], 10);
       games.push({
         week: currentWeek,
         date: null,
         time: rowTime,
         court: resolveCourt(item.x, courts),
-        team1: parseInt(mm[1], 10),
-        team2: parseInt(mm[2], 10),
+        team1,
+        team2,
+        doubleHeaderTeam: mm[1] ? team1 : mm[4] ? team2 : null,
       });
     }
   }
